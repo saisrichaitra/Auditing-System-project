@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@2.1.5"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTR SLIP Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 40%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 8px;
+            align-self: flex-start;
+        }
+        input, select, button {
+            margin: 6px 0;
+            padding: 8px;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #loading {
+            margin-top: 10px;
+            color: red;
+            display: none;
+        }
+        #utrList {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            margin-top: 15px;
+        }
+        #utrList li {
+            padding: 5px 0;
+        }
+        #utrDisplay {
+            margin-top: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>UTR SLIP Form</h1>
+
+        <form id="uploadForm" enctype="multipart/form-data" method="POST" action="upload.php">
+            <label for="reg_number">Registration Number:</label>
+            <input type="text" id="reg_number" name="reg_number" required>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" readonly>
+
+            <label for="branch">Branch:</label>
+            <input type="text" id="branch" name="branch" readonly>
+
+            <label for="semester">Semester:</label>
+            <input type="text" id="semester" name="semester" readonly>
+
+            <label for="student_type">Student Type:</label>
+            <input type="text" id="student_type" name="student_type" readonly>
+
+            <label for="fee_type">Fee Type:</label>
+            <input type="text" id="fee_type" name="fee_type" readonly>
+
+            <label for="amount">Amount:</label>
+            <input type="text" id="amount" name="amount" readonly>
+
+            <label for="PaidAmount">Paid Amount:</label>
+            <input type="text" id="PaidAmount" name="PaidAmount" required>
+
+            <label for="imageInput">Upload UTR SLIP:</label>
+            <input type="file" id="imageInput" name="images[]" accept="image/*" multiple required>
+
+            <div id="utrDisplay">
+                <p><strong>Extracted UTR Numbers:</strong></p>
+                <ul id="utrList"></ul>
+            </div>
+
+            <!-- CHECK button -->
+            <button type="button" id="checkButton">CHECK</button>
+
+            <!-- VERIFY button (directly below CHECK button, initially hidden) -->
+            <button type="button" id="verifyButton" style="display:none;">VERIFY</button>
+
+            <!-- SUBMIT button remains at the bottom -->
+            <button type="submit">SUBMIT</button>
+        </form>
+
+        <div id="loading">Processing images, please wait...</div>
+
+        <div id="verificationSection" style="display:none; margin-top: 20px;">
+            <h3>Payment Details</h3>
+            <p><strong>Paid Amount:</strong> <span id="PaidAmountDisplay"></span></p>
+            <p><strong>Due Amount:</strong> <span id="dueAmountDisplay"></span></p>
+            <p><strong>Transaction Date & Time:</strong> <span id="transactionTimeDisplay"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('reg_number').addEventListener('blur', function() {
+            const reg_number = this.value.trim();
+            if (reg_number) {
+                fetch(`get_student.php?reg_number=${reg_number}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                        } else {
+                            document.getElementById('name').value = data.name || '';
+                            document.getElementById('branch').value = data.branch || '';
+                            document.getElementById('semester').value = data.semester || '';
+                            document.getElementById('student_type').value = data.student_type || '';
+                            document.getElementById('fee_type').value = data.fee_type || '';
+                            document.getElementById('amount').value = data.amount || '';
+                        }
+                    })
+                    .catch(error => console.error('Error fetching data:', error));
+            }
+        });
+
+        document.getElementById('checkButton').addEventListener('click', async function() {
+            const imageInput = document.getElementById('imageInput');
+            if (!imageInput.files.length) {
+                alert('Please select at least one image.');
+                return;
+            }
+
+            document.getElementById('loading').style.display = 'block';
+            const utrList = document.getElementById('utrList');
+            utrList.innerHTML = '';
+
+            try {
+                const processImage = async (imageFile) => {
+                    const { data: { text } } = await Tesseract.recognize(imageFile, 'eng', { logger: m => console.log(m) });
+                    console.log('Extracted text:', text);
+                    const utrMatch = text.match(/(?:UTR|utr)\s*[:\-]?\s*([A-Za-z0-9]+)/);
+                    return utrMatch ? utrMatch[1] : 'Not found';
+                };
+
+                const results = await Promise.all([...imageInput.files].map(processImage));
+
+                results.forEach(utr => {
+                    const input = document.createElement('input');
+                    input.setAttribute('type', 'hidden');
+                    input.setAttribute('name', 'utr[]');
+                    input.value = utr;
+                    document.getElementById('uploadForm').appendChild(input);
+
+                    const listItem = document.createElement('li');
+                    listItem.textContent = utr;
+                    utrList.appendChild(listItem);
+                });
+
+                // Show the VERIFY button immediately after CHECK
+                document.getElementById('verifyButton').style.display = 'block';
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error processing the images. Please try again.');
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        });
+
+        document.getElementById('verifyButton').addEventListener('click', function() {
+            const paidAmount = parseFloat(document.getElementById('PaidAmount').value) || 0;
+            const totalAmount = parseFloat(document.getElementById('amount').value) || 0;
+            const dueAmount = totalAmount - paidAmount;
+
+            document.getElementById('PaidAmountDisplay').textContent = paidAmount;
+            document.getElementById('dueAmountDisplay').textContent = dueAmount;
+            document.getElementById('transactionTimeDisplay').textContent = new Date().toLocaleString();
+            document.getElementById('verificationSection').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

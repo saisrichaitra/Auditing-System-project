@@ -1,0 +1,152 @@
+Received files: Array
+(
+    [name] => Array
+        (
+            [0] => bhu1.jpg
+            [1] => bhu2.jpg
+            [2] => bhu3.jpg
+            [3] => img4.jpg
+        )
+
+    [type] => Array
+        (
+            [0] => image/jpeg
+            [1] => image/jpeg
+            [2] => image/jpeg
+            [3] => image/jpeg
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => C:\xampp\tmp\php3FD7.tmp
+            [1] => C:\xampp\tmp\php3FD8.tmp
+            [2] => C:\xampp\tmp\php3FD9.tmp
+            [3] => C:\xampp\tmp\php3FDA.tmp
+        )
+
+    [error] => Array
+        (
+            [0] => 0
+            [1] => 0
+            [2] => 0
+            [3] => 0
+        )
+
+    [size] => Array
+        (
+            [0] => 67260
+            [1] => 32570
+            [2] => 32642
+            [3] => 32752
+        )
+
+)
+Received UTRs: Array
+(
+    [0] => 424822913126
+    [1] => 961846878292
+    [2] => 425844264350
+    [3] => 409362197648
+)
+Temporary file path for bhu1.jpg: C:\xampp\tmp\php3FD7.tmpImage content size for bhu1.jpg: 67260Successfully inserted bhu1.jpg with UTR: 424822913126Temporary file path for bhu2.jpg: C:\xampp\tmp\php3FD8.tmpImage content size for bhu2.jpg: 32570Successfully inserted bhu2.jpg with UTR: 961846878292Temporary file path for bhu3.jpg: C:\xampp\tmp\php3FD9.tmpImage content size for bhu3.jpg: 32642Successfully inserted bhu3.jpg with UTR: 425844264350Temporary file path for img4.jpg: C:\xampp\tmp\php3FDA.tmpImage content size for img4.jpg: 32752Successfully inserted img4.jpg with UTR: 409362197648Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Received files: Array
+(
+    [name] => Array
+        (
+            [0] => bhu1.jpg
+            [1] => bhu2.jpg
+            [2] => bhu3.jpg
+            [3] => img4.jpg
+        )
+
+    [type] => Array
+        (
+            [0] => image/jpeg
+            [1] => image/jpeg
+            [2] => image/jpeg
+            [3] => image/jpeg
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => C:\xampp\tmp\php65E9.tmp
+            [1] => C:\xampp\tmp\php65FA.tmp
+            [2] => C:\xampp\tmp\php65FB.tmp
+            [3] => C:\xampp\tmp\php65FC.tmp
+        )
+
+    [error] => Array
+        (
+            [0] => 0
+            [1] => 0
+            [2] => 0
+            [3] => 0
+        )
+
+    [size] => Array
+        (
+            [0] => 67260
+            [1] => 32570
+            [2] => 32642
+            [3] => 32752
+        )
+
+)
+Received UTRs: Array
+(
+    [0] => 424822913126
+    [1] => 961846878292
+    [2] => 425844264350
+    [3] => 409362197648
+)
+Temporary file path for bhu1.jpg: C:\xampp\tmp\php65E9.tmpImage content size for bhu1.jpg: 67260Successfully inserted bhu1.jpg with UTR: 424822913126Temporary file path for bhu2.jpg: C:\xampp\tmp\php65FA.tmpImage content size for bhu2.jpg: 32570Successfully inserted bhu2.jpg with UTR: 961846878292Temporary file path for bhu3.jpg: C:\xampp\tmp\php65FB.tmpImage content size for bhu3.jpg: 32642Successfully inserted bhu3.jpg with UTR: 425844264350Temporary file path for img4.jpg: C:\xampp\tmp\php65FC.tmpImage content size for img4.jpg: 32752Successfully inserted img4.jpg with UTR: 409362197648Image with ID 0 not found.Image with ID 1 not found.Image with ID 1 not found.Image with ID 0 not found.Image with ID 1 not found.Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Image with ID 0 not found.Received files: Array
+(
+    [name] => Array
+        (
+            [0] => bhu3.jpg
+            [1] => bhu2 - Copy.jpg
+            [2] => bhu2.jpg
+        )
+
+    [type] => Array
+        (
+            [0] => image/jpeg
+            [1] => image/jpeg
+            [2] => image/jpeg
+        )
+
+    [tmp_name] => Array
+        (
+            [0] => C:\xampp\tmp\php23AA.tmp
+            [1] => C:\xampp\tmp\php23AB.tmp
+            [2] => C:\xampp\tmp\php23AC.tmp
+        )
+
+    [error] => Array
+        (
+            [0] => 0
+            [1] => 0
+            [2] => 0
+        )
+
+    [size] => Array
+        (
+            [0] => 32642
+            [1] => 32570
+            [2] => 32570
+        )
+
+)
+Received UTRs: Array
+(
+    [0] => 425844264350
+    [1] => 961846878292
+    [2] => 961846878292
+)
+Temporary file path for bhu3.jpg: C:\xampp\tmp\php23AA.tmpImage content size for bhu3.jpg: 32642Successfully inserted bhu3.jpg with UTR: 425844264350Temporary file path for bhu2 - Copy.jpg: C:\xampp\tmp\php23AB.tmpImage content size for bhu2 - Copy.jpg: 32570Successfully inserted bhu2 - Copy.jpg with UTR: 961846878292Temporary file path for bhu2.jpg: C:\xampp\tmp\php23AC.tmpImage content size for bhu2.jpg: 32570Successfully inserted bhu2.jpg with UTR: 961846878292Missing required form fields.Missing required form fields or files.Missing required form fields or files.Missing required form fields or files.Missing required form fields or files.Error executing query: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokensMissing required form fields or files.Upload error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'paid_amount' in 'field list'Upload error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'image_upload_db.students' doesn't exist
+Upload error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'image_upload_db.students' doesn't exist
+Upload error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'phone_number' in 'field list'
+SMS Response: {"return":false,"status_code":412,"message":"Invalid Authentication, Check Authorization Key"}
+SMS Response: {"return":false,"status_code":412,"message":"Invalid Authentication, Check Authorization Key"}
+SMS Response: {"return":false,"status_code":412,"message":"Invalid Authentication, Check Authorization Key"}
+SMS Response: {"return":false,"status_code":412,"message":"Invalid Authentication, Check Authorization Key"}
+SMS Response: {"return":false,"status_code":412,"message":"Invalid Authentication, Check Authorization Key"}
